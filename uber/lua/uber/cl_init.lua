@@ -152,7 +152,7 @@ local function uberMenu()
 		draw.RoundedBox(0, 0, 0, w, 30, Color(0, 0, 0, 255) )
 
 		surface.SetDrawColor(100, 100, 100, 50)
-	    surface.SetTexture(gradient)
+		surface.SetTexture(gradient)
 	    surface.DrawTexturedRect(0, 0, w, 30)
 
 	    surface.SetDrawColor(100, 100, 100, 50)
@@ -188,7 +188,7 @@ local function uberMenu()
 
 	local uberScrollPNL = vgui.Create("DScrollPanel", uberFrame)
 	uberScrollPNL:Dock(FILL)
-	function uberScrollPNL:Paint(w, h)
+	function uberScrollPNL:Paint(w, h) 
 	end
 
 	local uberDriverPanel = vgui.Create("DPanel", uberScrollPNL)
