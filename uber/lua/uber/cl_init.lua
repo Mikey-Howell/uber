@@ -48,83 +48,83 @@ end
 -- All this code for a circled avatar......
 -- Circle Avatar Code!
 local function MakeCirclePoly( _x, _y, _r, _points )
-    local _u = ( _x + _r * 320 ) - _x;
-    local _v = ( _y + _r * 320 ) - _y;
+	local _u = ( _x + _r * 320 ) - _x;
+    	local _v = ( _y + _r * 320 ) - _y;
  
-    local _slices = ( 2 * math.pi ) / _points;
-    local _poly = { };
-    for i = 0, _points - 1 do
-        local _angle = ( _slices * i ) % _points;
-        local x = _x + _r * math.cos( _angle );
-        local y = _y + _r * math.sin( _angle );
-        table.insert( _poly, { x = x, y = y, u = _u, v = _v } )
-    end
+    	local _slices = ( 2 * math.pi ) / _points;
+    	local _poly = { };
+    	for i = 0, _points - 1 do
+        	local _angle = ( _slices * i ) % _points;
+        	local x = _x + _r * math.cos( _angle );
+        	local y = _y + _r * math.sin( _angle );
+        	table.insert( _poly, { x = x, y = y, u = _u, v = _v } )
+    	end
  
-    return _poly;
+    	return _poly;
 end
  
 local PANEL = {}
  
 function PANEL:Init()
-    self.Avatar = vgui.Create("AvatarImage", self)
-    self.Avatar:SetPaintedManually(true)
-    self.material = Material( "effects/flashlight001" )
-    self:OnSizeChanged(self:GetWide(), self:GetTall())
+    	self.Avatar = vgui.Create("AvatarImage", self)
+    	self.Avatar:SetPaintedManually(true)
+    	self.material = Material( "effects/flashlight001" )
+    	self:OnSizeChanged(self:GetWide(), self:GetTall())
 end
  
 function PANEL:PerformLayout()
-    self:OnSizeChanged(self:GetWide(), self:GetTall())
+    	self:OnSizeChanged(self:GetWide(), self:GetTall())
 end
  
 function PANEL:SetSteamID(...)
-    self.Avatar:SetSteamID(...)
+    	self.Avatar:SetSteamID(...)
 end
  
 function PANEL:SetPlayer(...)
-    self.Avatar:SetPlayer(...)
+    	self.Avatar:SetPlayer(...)
 end
  
 function PANEL:OnSizeChanged(w, h)
-    self.Avatar:SetSize(self:GetWide(), self:GetTall())
-    self.points = math.Max((self:GetWide()/4), 32)
-    self.poly = MakeCirclePoly(self:GetWide()/2, self:GetTall()/2, self:GetWide()/2, self.points)
+    	self.Avatar:SetSize(self:GetWide(), self:GetTall())
+    	self.points = math.Max((self:GetWide()/4), 32)
+    	self.poly = MakeCirclePoly(self:GetWide()/2, self:GetTall()/2, self:GetWide()/2, self.points)
 end
  
 function PANEL:DrawMask(w, h)
-    --draw.RoundedBox(w/4, 0, 0, w, h, color_white)
-    draw.NoTexture();
-    surface.SetMaterial(self.material); 
-    surface.SetDrawColor(color_white);
-    surface.DrawPoly(self.poly);
+    	--draw.RoundedBox(w/4, 0, 0, w, h, color_white)
+    	draw.NoTexture();
+    	surface.SetMaterial(self.material); 
+    	surface.SetDrawColor(color_white);
+    	surface.DrawPoly(self.poly);
 end
  
 function PANEL:Paint(w, h)
-    render.ClearStencil()
-    render.SetStencilEnable(true)
+    	render.ClearStencil()
+    	render.SetStencilEnable(true)
  
-    render.SetStencilWriteMask(1)
-    render.SetStencilTestMask(1)
+    	render.SetStencilWriteMask(1)
+    	render.SetStencilTestMask(1)
  
-    render.SetStencilFailOperation( STENCILOPERATION_REPLACE )
-    render.SetStencilPassOperation( STENCILOPERATION_ZERO )
-    render.SetStencilZFailOperation( STENCILOPERATION_ZERO )
-    render.SetStencilCompareFunction( STENCILCOMPARISONFUNCTION_NEVER )
-    render.SetStencilReferenceValue( 1 )
+    	render.SetStencilFailOperation( STENCILOPERATION_REPLACE )
+    	render.SetStencilPassOperation( STENCILOPERATION_ZERO )
+    	render.SetStencilZFailOperation( STENCILOPERATION_ZERO )
+    	render.SetStencilCompareFunction( STENCILCOMPARISONFUNCTION_NEVER )
+    	render.SetStencilReferenceValue( 1 )
  
-    self:DrawMask(w, h)
+    	self:DrawMask(w, h)
  
-    render.SetStencilFailOperation(STENCILOPERATION_ZERO)
-    render.SetStencilPassOperation(STENCILOPERATION_REPLACE)
-    render.SetStencilZFailOperation(STENCILOPERATION_ZERO)
-    render.SetStencilCompareFunction(STENCILCOMPARISONFUNCTION_EQUAL)
-    render.SetStencilReferenceValue(1)
+    	render.SetStencilFailOperation(STENCILOPERATION_ZERO)
+    	render.SetStencilPassOperation(STENCILOPERATION_REPLACE)
+    	render.SetStencilZFailOperation(STENCILOPERATION_ZERO)
+    	render.SetStencilCompareFunction(STENCILCOMPARISONFUNCTION_EQUAL)
+    	render.SetStencilReferenceValue(1)
  
-    self.Avatar:SetPaintedManually(false)
-    self.Avatar:PaintManual()
-    self.Avatar:SetPaintedManually(true)
+    	self.Avatar:SetPaintedManually(false)
+    	self.Avatar:PaintManual()
+    	self.Avatar:SetPaintedManually(true)
  
-    render.SetStencilEnable(false)
-    render.ClearStencil()
+    	render.SetStencilEnable(false)
+    	render.ClearStencil()
 end
 
 vgui.Register("AvatarMask", PANEL)
@@ -153,16 +153,16 @@ local function uberMenu()
 
 		surface.SetDrawColor(100, 100, 100, 50)
 		surface.SetTexture(gradient)
-	    surface.DrawTexturedRect(0, 0, w, 30)
+	    	surface.DrawTexturedRect(0, 0, w, 30)
 
-	    surface.SetDrawColor(100, 100, 100, 50)
-	    surface.SetTexture(gradient)
-	    surface.DrawTexturedRect(0, 0, w, h)
+	    	surface.SetDrawColor(100, 100, 100, 50)
+	    	surface.SetTexture(gradient)
+	    	surface.DrawTexturedRect(0, 0, w, h)
 
-	    surface.SetDrawColor(blue)
-        surface.DrawRect(0, 0, 3, 30 - 0.1 * 2)
+	    	surface.SetDrawColor(blue)
+        	surface.DrawRect(0, 0, 3, 30 - 0.1 * 2)
 
-	    draw.SimpleTextOutlined("Uber","uberFontTitle", w/2, 0, color_white, TEXT_ALIGN_CENTER, 0, 1, color_black)
+	    	draw.SimpleTextOutlined("Uber","uberFontTitle", w/2, 0, color_white, TEXT_ALIGN_CENTER, 0, 1, color_black)
 	end
 
 	local uberClose = vgui.Create("DButton", uberFrame)
@@ -199,17 +199,17 @@ local function uberMenu()
 		draw.RoundedBox(0, 0, 0, w, h, Color(16, 16, 16, 255) )
 
 		surface.SetDrawColor(75, 75, 75, 100)
-	    surface.SetTexture(gradient)
-	    surface.DrawTexturedRect(0, 0, w, h)
+	    	surface.SetTexture(gradient)
+	    	surface.DrawTexturedRect(0, 0, w, h)
 
-	    draw.SimpleTextOutlined("Driver: "..LocalPlayer():Nick(),"uberFontTitle", w*0.3, h*0.2, color_white, TEXT_ALIGN_LEFT, 0, 1, color_black)
-	    draw.SimpleTextOutlined("Price: $1337","uberFontTitle", w*0.3, h*0.5, color_white, TEXT_ALIGN_LEFT, 0, 1, color_black)
+	    	draw.SimpleTextOutlined("Driver: "..LocalPlayer():Nick(),"uberFontTitle", w*0.3, h*0.2, color_white, TEXT_ALIGN_LEFT, 0, 1, color_black)
+	    	draw.SimpleTextOutlined("Price: $1337","uberFontTitle", w*0.3, h*0.5, color_white, TEXT_ALIGN_LEFT, 0, 1, color_black)
 	end
 
 	local uberAvatar = vgui.Create("AvatarMask", uberDriverPanel)
-    uberAvatar:SetSize(84, 84)
-    uberAvatar:SetPos(0, 5)
-    uberAvatar:SetPlayer(LocalPlayer(), 128)
+    	uberAvatar:SetSize(84, 84)
+    	uberAvatar:SetPos(0, 5)
+    	uberAvatar:SetPlayer(LocalPlayer(), 128)
 end
 
 local function uberContext()
